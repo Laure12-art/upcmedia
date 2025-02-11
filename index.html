@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des Contributions</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .modal {
+        display: flex;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+    }
+
+    .modal-content {
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.2);
+        width: 320px;
+        text-align: center;
+    }
+    .modal h2 {
+        color: #2c3e50;
+        margin-bottom: 25px;
+    }
+
+    /* Style des inputs */
+    .input-group {
+        margin-bottom: 20px;
+        text-align: left;
+    }
+
+    .input-group label {
+        display: block;
+        margin-bottom: 8px;
+        color: #34495e;
+        font-weight: 500;
+    }
+    .input-group input {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid #bdc3c7;
+        border-radius: 8px;
+        font-size: 16px;
+        transition: border-color 0.3s;
+    }
+
+    .input-group input:focus {
+        outline: none;
+        border-color: #3498db;
+    }
+
+    /* Style du bouton */
+    button {
+        background: #3498db;
+        color: white;
+        border: none;
+        padding: 12px 25px;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background 0.3s;
+        width: 100%;
+    }
+
+    button:hover {
+        background: #2980b9;
+    }
+    /* Liste des contributions */
+    .contribution-list {
+        margin: 40px auto;
+        max-width: 800px;
+        width: 90%;
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        display: none;
+    }
+
+    .contribution-item {
+        display: flex;
+        align-items: center;
+        padding: 15px;
+        margin: 15px 0;
+        background: #f8f9fa;
+        border-radius: 10px;
+        transition: transform 0.2s;
+    }
+
+    .contribution-item:hover {
+        transform: translateX(10px);
+        background: #f1f3f5;
+    }
+
+    .contrib-checkbox {
+        width: 20px;
+        height: 20px;
+        margin-right: 15px;
+        cursor: pointer;
+    }
+
+    .error {
+        color: #e74c3c;
+        margin-top: 15px;
+        font-weight: 500;
+    }
+
+    h1 {
+        color: #2c3e50;
+        margin: 40px 0;
+        font-size: 2.5em;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .last-updated {
+        margin: 10px 0;
+        font-style: italic;
+        color: #7f8c8d;
+    }
+</style>
+<body>
+
+<div id="loginModal" class="modal">
+    <div class="modal-content">
+        <h2>Connexion Requise</h2>
+        <h3>Pour plus de securité ☺ </h3>
+        <form id="loginForm">
+            <div class="input-group">
+                <label for="password">Mot de passe :</label>
+                <input type="password" id="password" placeholder="users 0000" required>
+            </div>
+            <button type="submit">Accéder</button>
+        </form>
+        <p id="errorMsg" class="error"></p>
+    </div>
+</div>
+
+<h1>Aumonerie UPC</h1>
+<h1>Contribution département du média </h1>
+<div class="contribution-list" id="contributionList">
+    <div class="last-updated" id="lastUpdated"></div>
+    <div class="current-date" id="currentDate"></div>
+    <div class="contribution-item">
+        <input type="checkbox" id="contrib1" class="contrib-checkbox">
+        <label for="contrib1">Aumos Djessy</label>
+    </div>
+    <div class="contribution-item">
+        <input type="checkbox" id="contrib2" class="contrib-checkbox">
+        <label for="contrib2">Aumos Arnold</label>
+    </div>
+    <div class="contribution-item">
+        <input type="checkbox" id="contrib3" class="contrib-checkbox">
+        <label for="contrib3">Aumos Joel</label>
+    </div>
+    <div class="contribution-item">
+        <input type="checkbox" id="contrib3" class="contrib-checkbox">
+        <label for="contrib3">Sr Laure</label>
+    </div>
+    <div class="contribution-item">
+        <input type="checkbox" id="contrib3" class="contrib-checkbox">
+        <label for="contrib3">Sr Guthy</label>
+    </div>
+    <div class="contribution-item">
+        <input type="checkbox" id="contrib3" class="contrib-checkbox">
+        <label for="contrib3">Sr Dione</label>
+    </div>
+    <div class="contribution-item">
+        <input type="checkbox" id="contrib3" class="contrib-checkbox">
+        <label for="contrib3">Sr Rofel</label>
+    </div>
+    <div class="contribution-item">
+        <input type="checkbox" id="contrib3" class="contrib-checkbox">
+        <label for="contrib3">Fr Michel</label>
+    </div>
+    <div class="contribution-item">
+        <input type="checkbox" id="contrib3" class="contrib-checkbox">
+        <label for="contrib3">Fr Vainqueur</label>
+    </div>
+    <div class="contribution-item">
+        <input type="checkbox" id="contrib3" class="contrib-checkbox">
+        <label for="contrib3">Fr Manassé</label>
+    </div>
+    <div class="contribution-item">
+        <input type="checkbox" id="contrib3" class="contrib-checkbox">
+        <label for="contrib3">Fr Patrick</label>
+    </div>
+    <div class="contribution-item">
+        <input type="checkbox" id="contrib3" class="contrib-checkbox">
+        <label for="contrib3">Fr Franck</label>
+    </div>
+
+    <button id="loadThisWeek">Voir les contributions de cette semaine</button><br><br>
+    <button id="loadLastWeek">Charger les contributions de la semaine passée</button>
+</div>
+
+<script>
+    const loginModal = document.getElementById('loginModal');
+    const contributionList = document.getElementById('contributionList');
+    const loginForm = document.getElementById('loginForm');
+    const passwordInput = document.getElementById('password');
+    const errorMsg = document.getElementById('errorMsg');
+    const lastUpdated = document.getElementById('lastUpdated');
+    const currentDate = document.getElementById('currentDate');
+    const checkboxes = document.querySelectorAll('.contrib-checkbox');
+
+    let isAdmin = false;
+    let currentWeek = true; // true pour la semaine actuelle, false pour la semaine passée
+
+    window.onload = () => {
+        loginModal.style.display = 'flex';
+        loadContributions();
+    };
+
+    loginForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const password = passwordInput.value;
+        
+        if (password === 'Leoj') { // Mot de passe admin
+            isAdmin = true;
+            handleLogin(true);
+        } else if (password === '0000') { // Code utilisateur
+            isAdmin = false;
+            handleLogin(false);
+        } else {
+            errorMsg.textContent = 'Accès refusé : Code incorrect';
+            passwordInput.value = '';
+        }
+    });
+
+    function handleLogin(adminStatus) {
+        loginModal.style.display = 'none';
+        contributionList.style.display = 'block';
+        updateCurrentDate();
+        updateLastUpdated();
+
+        checkboxes.forEach((checkbox, index) => {
+            checkbox.disabled = !adminStatus;
+            checkbox.parentElement.style.opacity = adminStatus ? 1 : 0.7;
+
+            // Charger l'état des cases à cocher pour cette semaine
+            checkbox.checked = localStorage.getItem(`contrib${index + 1}_currentWeek`) === 'true';
+
+            // Enregistrer les modifications pour la semaine actuelle
+            checkbox.addEventListener('change', () => {
+                if (adminStatus) {
+                    if (currentWeek) {
+                        localStorage.setItem(`contrib${index + 1}_currentWeek`, checkbox.checked);
+                        console.log(`${checkbox.nextElementSibling.innerText} pour cette semaine est ${checkbox.checked ? 'coché' : 'décoché'}`);
+                    } else {
+                        localStorage.setItem(`contrib${index + 1}_lastWeek`, checkbox.checked);
+                        console.log(`${checkbox.nextElementSibling.innerText} pour la semaine passée est ${checkbox.checked ? 'coché' : 'décoché'}`);
+                    }
+                }
+            });
+        });
+        
+        if (!adminStatus) {
+            // Désactiver les cases à cocher pour l'utilisateur
+            checkboxes.forEach(checkbox => {
+                checkbox.disabled = true;
+            });
+        }
+    }
+
+    function updateLastUpdated() {
+        const date = new Date();
+        lastUpdated.textContent = `Dernière mise à jour : ${date.toLocaleDateString()} à ${date.toLocaleTimeString()}`;
+    }
+
+    function updateCurrentDate() {
+        const date = new Date();
+        currentDate.textContent = `Semaine du : ${date.toLocaleDateString()}`;
+    }
+
+    document.getElementById('loadThisWeek').addEventListener('click', () => {
+        currentWeek = true;
+        updateCurrentDate(); // Mettre à jour la date de la semaine actuelle
+        checkboxes.forEach((checkbox, index) => {
+            checkbox.checked = localStorage.getItem(`contrib${index + 1}_currentWeek`) === 'true';
+            checkbox.disabled = !isAdmin; // Activer les cases pour cette semaine si admin
+        });
+    });
+
+    document.getElementById('loadLastWeek').addEventListener('click', () => {
+        currentWeek = false;
+        const lastWeek = new Date();
+        lastWeek.setDate(lastWeek.getDate() - 7);
+        currentDate.textContent = `Semaine du : ${lastWeek.toLocaleDateString()}`;
+
+        checkboxes.forEach((checkbox, index) => {
+            checkbox.checked = localStorage.getItem(`contrib${index + 1}_lastWeek`) === 'true';
+            checkbox.disabled = !isAdmin; // Désactiver pour les utilisateurs non admin, mais permettre à l'admin de cocher
+        });
+    });
+</script>
+</body>
+</html>
